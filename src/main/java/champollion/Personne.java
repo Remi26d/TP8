@@ -1,17 +1,18 @@
-
 package champollion;
 
 /**
- *  Une Personne    , classe abstraite, sera spécifiée par des classes concrètes comme Étudiant ou Enseignant
+ * Classe abstraite représentant une Personne.
+ * À spécifier dans les classes dérivées (comme Étudiant ou Enseignant).
  */
 public abstract class Personne {
-    private final String nom;
-    private final String email;
+    private final String nom;  // Nom de la personne
+    private final String email;  // Adresse email de la personne
 
     /**
-     * Constructeur de la classe Personne.
-     * @param nom le nom de la personne
-     * @param email l'adresse email de la personne
+     * Constructeur pour initialiser une Personne.
+     *
+     * @param nom   Nom de la personne
+     * @param email Adresse email de la personne
      */
     protected Personne(String nom, String email) {
         this.nom = nom;
@@ -19,18 +20,20 @@ public abstract class Personne {
     }
 
     /**
-     * Retourne le nom de la personne.
-     * @return le nom de la personne
+     * Obtient le nom de la personne.
+     *
+     * @return Le nom
      */
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
     /**
-     * Retourne l'adresse email de la personne.
-     * @return l'adresse email de la personne
+     * Obtient l'email de la personne.
+     *
+     * @return L'adresse email
      */
     public String getEmail() {
-        return email;
+        return this.email;
     }
 }

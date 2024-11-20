@@ -1,8 +1,8 @@
 package champollion;
 
 /**
- * Les types d'intervention possibles
+ * Enumération des types d'interventions possibles.
  */
 public enum TypeIntervention {
-	CM, TD, TP;	
+	CM, TD, TP;
 }

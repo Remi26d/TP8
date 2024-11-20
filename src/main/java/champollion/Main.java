@@ -1,28 +1,39 @@
 package champollion;
 
-/**
- * Un exemple d'utilisation des classes
- */
+import java.util.Date;
+
 public class Main {
     public static void main(String[] args) {
-        Enseignant bastide = new Enseignant("Rémi Bastide", "Remi.Bastide@irit.fr");
-        Enseignant lamine = new Enseignant("Elyes Lamine", "Elyes.Lamine@univ-jfc.fr");
+        try {
+            // Création des objets principaux
+            Enseignant professeur = new Enseignant("Alice Dupont", "alice.dupont@example.com");
+            Salle sallePrincipale = new Salle("Salle Informatique", 40);
+            UE uml = new UE("UML et conception logicielle");
+            UE java = new UE("Programmation en Java");
 
-        UE uml = new UE("Conception par objets avec UML");
-        UE bd = new UE("Bases de données");
-        UE web = new UE("Technologies web");
+            // Ajout des enseignements pour l'enseignant
+            professeur.ajouterEnseignement(uml, 12, 8, 5);  // 12h CM, 8h TD, 5h TP
+            professeur.ajouterEnseignement(java, 6, 10, 4);  // 6h CM, 10h TD, 4h TP
 
-        bastide.ajouteEnseignement(uml, 12, 20, 20);
-        bastide.ajouteEnseignement(web, 8, 20, 30);
-        lamine.ajouteEnseignement(bd, 10, 20, 15);
-        lamine.ajouteEnseignement(web, 15, 15, 25);
+            // Création et ajout d'interventions
+            Intervention intervention1 = new Intervention(uml, TypeIntervention.TD, new Date(), 4, sallePrincipale);
+            Intervention intervention2 = new Intervention(java, TypeIntervention.CM, new Date(), 6, sallePrincipale);
 
-        System.out.printf("Mr. %s a un total de %d heures prévues%n", bastide.getNom(), bastide.heuresPrevues());
-        System.out.printf("Mr. %s a un total de %d heures prévues%n", lamine.getNom(), lamine.heuresPrevues());
-        System.out.printf("Mr. %s a un total de %d heures prévues dans l'UE %s%n",
-                bastide.getNom(),
-                bastide.heuresPrevuesPourUE(uml),
-                uml.getIntitule());
+            professeur.ajouterIntervention(intervention1);
+            professeur.ajouterIntervention(intervention2);
+
+            // Affichage des informations pour chaque UE
+            System.out.println("=== Informations Enseignant ===");
+            System.out.println("Total des heures prévues : " + professeur.calculerHeuresPrevues());
+            System.out.println("Heures prévues pour 'UML' : " + professeur.calculerHeuresPrevuesPourUE(uml));
+            System.out.println("Heures prévues pour 'Java' : " + professeur.calculerHeuresPrevuesPourUE(java));
+
+            System.out.println("=== Heures Restantes à Planifier ===");
+            System.out.println("UML, TD : " + professeur.heuresRestantesAPlanifier(TypeIntervention.TD, uml));
+            System.out.println("Java, TP : " + professeur.heuresRestantesAPlanifier(TypeIntervention.TP, java));
+
+        } catch (Exception e) {
+            System.err.println("Erreur : " + e.getMessage());
+        }
     }
-
 }
